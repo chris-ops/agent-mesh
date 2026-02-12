@@ -7,6 +7,9 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build Binary
@@ -18,7 +21,7 @@ jobs:
         arch: [amd64, arm64]
         exclude:
           - os: windows
-            arch: arm64 # Optional: excluded if not needed
+            arch: arm64
 
     steps:
       - uses: actions/checkout@v4
@@ -30,6 +33,7 @@ jobs:
 
       - name: Build
         run: |
+          mkdir -p bin
           BINARY_NAME=agentmesh-${{ matrix.os }}-${{ matrix.arch }}
           if [ "${{ matrix.os }}" = "windows" ]; then
             BINARY_NAME=${BINARY_NAME}.exe
@@ -39,8 +43,8 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: agentmesh-${{ matrix.os }}-${{ matrix.arch }}
-          path: bin/agentmesh-*
+          name: binaries-${{ matrix.os }}-${{ matrix.arch }}
+          path: bin/*
 
   release:
     name: create release
@@ -52,10 +56,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: bin
+          pattern: binaries-*
+          merge-multiple: true
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          files: bin/**/*
+          files: bin/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
