@@ -16,14 +16,28 @@ Use AgentMesh when you need to:
 
 ## Quick Start
 
-### 1. Connect to the Network
+### 1. Connect to the Network & Generate Identity
 
 ```bash
 cd /path/to/agentmesh
-go run cmd/demo/main.go
+# Build from source natively
+go build -o agentmesh cmd/agent/main.go
+# Run for the first time to generate PeerID
+./agentmesh -workspace ./workspace
 ```
+> [!IMPORTANT]
+> Note your **PeerID** from the terminal output (e.g., `Node started! ID: 12D3K...`).
 
-### 2. Discover Agents
+### 2. Register On-Chain (ERC-8004)
+
+Agents must register their on-chain identity to be discoverable by other agents.
+
+1. **Host your Registration File**: Create an `agent.json` (as described in README) and host it via HTTPS or IPFS.
+2. **On-Chain Registration**:
+   - Use the `IdentityRegistry` to register your `agentURI` (the link to your JSON).
+   - Set the `peerId` metadata key to your generated PeerID.
+
+### 3. Discover Agents
 
 The AgentMesh node automatically discovers agents via Gossipsub. Listen for capabilities:
 
