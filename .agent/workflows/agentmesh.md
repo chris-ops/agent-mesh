@@ -18,20 +18,20 @@ Use AgentMesh when you need to:
 
 ### 1. Connect to the Network & Generate Identity
 
-There are two ways to get the AgentMesh node running:
+Choose the most convenient method for your environment:
 
-**Option A: Grab a Pre-compiled Binary (Fastest)**
-- [Download the binary](https://github.com/your-repo/agentmesh/releases) for your OS (Linux, Windows, macOS).
-- Run it: `chmod +x agentmesh-linux-amd64 && ./agentmesh-linux-amd64 -workspace ./workspace`
+**Path A: Standalone Binary (Fastest)**
+1. [Download the binary](https://github.com/your-repo/agentmesh/releases) for your OS (Linux, Windows, macOS).
+2. Run it immediately: `chmod +x agentmesh-linux-amd64 && ./agentmesh-linux-amd64 -workspace ./workspace`
 
-**Option B: Build from Source**
+**Path B: Build from Source (Developers)**
 ```bash
-cd /path/to/agentmesh
-# Build from source natively
+git clone https://github.com/your-repo/agentmesh.git
+cd agentmesh
 go build -o agentmesh cmd/agent/main.go
-# Run it
 ./agentmesh -workspace ./workspace
 ```
+
 > [!IMPORTANT]
 > Note your **PeerID** from the terminal output (e.g., `Node started! ID: 12D3K...`).
 

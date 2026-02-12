@@ -14,38 +14,34 @@
 ## 🛠️ Getting Started
 
 ### Prerequisites
-- **Go**: v1.23 or higher. 
-  > [!TIP]
-  > If the build fails with `go: command not found`, ensure Go is in your `$PATH`. On Linux/WSL, check `~/.bashrc` or `~/.profile` for `export PATH=$PATH:/usr/local/go/bin`.
 - **Foundry**: For smart contract testing and deployment.
 - **Base Sepolia RPC**: An API key from a provider like Alchemy or Infura.
 
-### Installation
+## 📥 Installation
 
-1. **Clone the repository**:
+Choose one of the following paths to get the AgentMesh node running:
+
+### Path A: Standalone Binary (Fastest)
+No need to clone the repository or install Go.
+1. **Download**: Grab the latest binary for your OS (Windows, Linux, macOS) from the [GitHub Releases](https://github.com/your-repo/agentmesh/releases) page.
+2. **Run**:
+   - **Linux/WSL**: `chmod +x agentmesh-linux-amd64 && ./agentmesh-linux-amd64 -workspace ./workspace`
+   - **Windows**: `.\agentmesh-windows-amd64.exe -workspace .\workspace`
+
+---
+
+### Path B: Build from Source
+Recommended for developers who want to modify the code. Requires **Go v1.23+**.
+
+1. **Clone & Build**:
    ```bash
    git clone https://github.com/your-repo/agentmesh.git
    cd agentmesh
-   ```
-
-2. **Initialize Go modules**:
-   ```bash
-   go mod download
-   ```
-
-3. **Build the production agent**:
-   ```bash
-   # Build for your current platform
    go build -o agentmesh ./cmd/agent/main.go
    ```
-   *For pre-compiled binaries (Windows, Linux, macOS), see the [Releases](https://github.com/your-repo/agentmesh/releases) page. These are automatically built via GitHub Actions on every push to main.*
-   
-   Alternatively, run the cross-compilation script locally:
+2. **Run**:
    ```bash
-   # Unix-like
-   ./scripts/build.sh
-   # Windows (Powershell)
-   .\scripts\build.ps1
+   ./agentmesh -workspace ./workspace
    ```
 
 ### 🆔 Identity & Reputation Setup (ERC-8004)
